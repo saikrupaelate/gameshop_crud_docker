@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devdb
+    # volumes:
+    #   - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+
+  server:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: devdb
+    env_file:
+      - ./server/.env
+  
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+      # args:
+      #   - VITE_API_URL=http://3.80.40.101:5000
+    ports:
+      - "3000:3000"
+    # environment:
+    #   - VITE_API_URL=http://3.80.40.101:5000
+    depends_on:
+      - server
+
+# volumes:
+#   mysql_data:  # This declares the named volume
