@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-host="${DB_HOST:-mysql}"
+# host="${DB_HOST:-mysql}"
 port="${DB_PORT:-3306}"
-user="${DB_USER:-root}"
-password="${DB_PASSWORD:-root}"
+# user="${DB_USER:-root}"
+# password="${DB_PASSWORD:-root}"
 timeout=60
 
 echo "Waiting for MySQL at $host:$port..."

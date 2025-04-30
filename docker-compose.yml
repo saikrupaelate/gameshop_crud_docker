@@ -2,9 +2,9 @@ version: '3.8'
 services:
   mysql:
     image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: devdb
+    # environment:
+    #   MYSQL_ROOT_PASSWORD: root
+    #   MYSQL_DATABASE: devdb
     # volumes:
     #   - mysql_data:/var/lib/mysql
     ports:
@@ -25,13 +25,13 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      DB_HOST: mysql
+      # DB_HOST: mysql
       DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: root
-      DB_DATABASE: devdb
-    env_file:
-      - ./server/.env
+      # DB_USER: root
+      # DB_PASSWORD: root
+      # DB_DATABASE: devdb
+    # env_file:
+    #   - ./server/.env
   
   frontend:
     build: 
