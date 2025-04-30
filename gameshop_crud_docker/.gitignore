@@ -1,0 +1,16 @@
+# Node dependencies
+node_modules/
+
+# Build outputs (React/Vite)
+build/
+dist/
+
+# Logs
+*.log
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# VS Code settings (optional, dev environment only)
+.vscode/
