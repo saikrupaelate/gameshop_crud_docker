@@ -1,23 +1,10 @@
-#!/bin/bash
-set -e
-
-# host="${DB_HOST:-mysql}"
-port="${DB_PORT:-3306}"
-# user="${DB_USER:-root}"
-# password="${DB_PASSWORD:-root}"
-timeout=60
-
-echo "Waiting for MySQL at $host:$port..."
-
-while ! mysqladmin ping -h"$host" -P"$port" -u"$user" -p"$password" --silent; do
-  echo "MySQL is unavailable - sleeping"
-  sleep 5
-  timeout=$((timeout-5))
-  if [ $timeout -le 0 ]; then
-    echo "Timeout waiting for MySQL"
-    exit 1
-  fi
+# wait-for-db.sh
+#!/bin/sh
+host="$1"
+shift
+until mysql -h "$host" -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT 1;" &> /dev/null
+do
+  echo "Waiting for MySQL at $host..."
+  sleep 2
 done
-
-echo "MySQL is up - executing command"
 exec "$@"

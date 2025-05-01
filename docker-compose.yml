@@ -2,9 +2,9 @@ version: '3.8'
 services:
   mysql:
     image: mysql:5.7
-    # environment:
-    #   MYSQL_ROOT_PASSWORD: root
-    #   MYSQL_DATABASE: devdb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devdb
     # volumes:
     #   - mysql_data:/var/lib/mysql
     ports:
@@ -20,16 +20,17 @@ services:
       context: ./server
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "3001:3001"
     depends_on:
       mysql:
         condition: service_healthy
     environment:
-      # DB_HOST: mysql
+      DB_HOST: mysql
       DB_PORT: 3306
-      # DB_USER: root
-      # DB_PASSWORD: root
-      # DB_DATABASE: devdb
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: devdb
+    command: ["./wait-for-db.sh", "mysql", "node", "index.js"]
     # env_file:
     #   - ./server/.env
   
@@ -37,12 +38,10 @@ services:
     build: 
       context: ./client
       dockerfile: Dockerfile
-      # args:
-      #   - VITE_API_URL=http://3.80.40.101:5000
+      args:
+        - VITE_API_URL=http://184.73.84.38:3001
     ports:
       - "3000:3000"
-    # environment:
-    #   - VITE_API_URL=http://3.80.40.101:5000
     depends_on:
       - server
 

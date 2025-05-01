@@ -17,8 +17,8 @@ RUN apt-get update && \
 WORKDIR /app
 COPY --from=builder /app ./
 COPY --from=builder /app/node_modules ./node_modules
-EXPOSE 5000
+EXPOSE 3001
 COPY wait-for-db.sh .
 RUN chmod +x wait-for-db.sh
     
-CMD ["./wait-for-db.sh", "node", "index.js"]
+CMD ["./wait-for-db.sh", "mysql", "node", "index.js"]

@@ -5,7 +5,7 @@ import Card from "./components/card";
 
 function App() {
 
-    const baseUrl = "http://localhost:3001"
+    const baseUrl = "http://184.73.84.38:3001"
 
     const [values, setValues] = useState();
     const [games, setGames] = useState();

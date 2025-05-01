@@ -3,8 +3,8 @@ FROM node:18 AS builder
 WORKDIR /app
 
 # First add the environment variables
-# ARG VITE_API_URL=http://server:5000
-# ENV VITE_API_URL=$VITE_API_URL
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 
 COPY package*.json ./
 COPY vite.config.* ./
