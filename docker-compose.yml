@@ -3,8 +3,8 @@ services:
   mysql:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: devdb
+      MYSQL_ROOT_PASSWORD: nailton123
+      MYSQL_DATABASE: crudgames
     # volumes:
     #   - mysql_data:/var/lib/mysql
     ports:
