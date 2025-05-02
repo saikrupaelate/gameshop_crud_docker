@@ -25,11 +25,7 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: root
-      DB_DATABASE: devdb
+      MYSQL_ROOT_PASSWORD: nailton123
     command: ["./wait-for-db.sh", "mysql", "node", "index.js"]
     # env_file:
     #   - ./server/.env
